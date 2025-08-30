@@ -3,6 +3,7 @@
 ![CarGForce Monitor](https://img.shields.io/badge/Version-1.0.0-blue.svg)
 ![License](https://img.shields.io/badge/License-MIT-green.svg)
 ![Platform](https://img.shields.io/badge/Platform-Web%20Mobile-lightgrey.svg)
+![HTTPS](https://img.shields.io/badge/HTTPS-Required-red.svg)
 
 一个基于Web的汽车运动监测应用，使用手机内置传感器实时监测车辆运动过程中的加速度（G值）和方向变化。
 
@@ -11,6 +12,7 @@
 ## 目录
 
 - [功能特点](#功能特点)
+- [HTTPS要求](#https要求)
 - [技术栈](#技术栈)
 - [快速开始](#快速开始)
 - [使用说明](#使用说明)
@@ -32,6 +34,38 @@
 - 🔧 **传感器校准**：提供简单易用的传感器校准功能
 - 💾 **数据持久化**：可选的数据记录和导出功能
 
+## HTTPS要求
+
+**本项目强制要求使用HTTPS协议提供服务**。
+
+### 为什么需要HTTPS？
+
+1. **安全上下文要求**：现代浏览器要求DeviceMotion和DeviceOrientation API只能在安全上下文(HTTPS)中使用
+2. **用户隐私保护**：HTTPS加密传输保护用户的传感器数据不被窃取
+3. **浏览器策略**：大多数浏览器已限制非HTTPS网站访问传感器API
+
+### 部署要求
+
+- 生产环境必须使用有效的SSL证书
+- 开发环境可使用localhost(浏览器视localhost为安全来源)或自签名证书
+- 所有资源必须通过HTTPS加载，包括外部库(Chart.js等)
+
+### 本地开发HTTPS设置
+
+```bash
+# 使用mkcert创建本地证书
+mkcert -install
+mkcert localhost
+
+# 使用Node.js启动HTTPS服务器
+npm install -g http-server
+http-server -S -C localhost.pem -K localhost-key.pem
+
+# 或使用Live Server with HTTPS
+npm install -g live-server
+live-server --https=/path/to/cert.pem --https=/path/to/key.pem
+```
+
 ## 技术栈
 
 - **HTML5** - 页面结构和内容
@@ -45,7 +79,7 @@
 
 ### 在线使用
 
-1. 在手机浏览器中打开 [应用链接]()
+1. 在手机浏览器中打开 [应用链接](https://your-domain.com/car-gforce-monitor)
 2. 允许应用访问设备传感器权限
 3. 按照提示进行传感器校准
 4. 开始监测汽车运动数据
@@ -59,13 +93,13 @@ git clone https://github.com/your-username/CarGForce-Monitor.git
 # 进入项目目录
 cd CarGForce-Monitor
 
-# 安装本地服务器（如有需要）
-npm install -g http-server
+# 生成SSL证书（开发环境）
+mkcert localhost
 
-# 启动本地服务器
-http-server
+# 启动本地HTTPS服务器
+http-server -S -C localhost.pem -K localhost-key.pem
 
-# 在手机浏览器中访问显示地址
+# 在手机浏览器中访问显示的HTTPS地址
 ```
 
 ## 使用说明
@@ -132,6 +166,8 @@ CarGForce-Monitor/
 │   └── charts.js      # 图表处理模块
 ├── assets/            # 资源文件目录
 │   └── icons/         # 应用图标
+├── localhost.pem      # 开发环境SSL证书（不提交到Git）
+├── localhost-key.pem  # 开发环境SSL私钥（不提交到Git）
 └── README.md          # 项目说明文件
 ```
 
@@ -141,6 +177,7 @@ CarGForce-Monitor/
 
 - 现代浏览器（Chrome 60+、Firefox 55+、Safari 11+）
 - 支持DeviceMotion和DeviceOrientation API的设备
+- HTTPS环境（生产或开发）
 
 ### 构建说明
 
@@ -154,6 +191,14 @@ CarGForce-Monitor/
 - 可添加数据导出功能保存历史记录
 
 ## 常见问题
+
+### Q: 为什么必须使用HTTPS？
+
+A: 现代浏览器出于安全考虑，要求传感器API只能在安全上下文(HTTPS)中使用。这是浏览器的安全策略，无法绕过。
+
+### Q: 本地开发如何设置HTTPS？
+
+A: 可以使用mkcert工具生成本地证书，然后使用支持HTTPS的本地服务器。具体步骤见[HTTPS要求](#https要求)部分。
 
 ### Q: 为什么手机静止时Z轴显示1G？
 
@@ -192,6 +237,7 @@ A: 大多数现代智能手机都支持，包括iOS和Android设备。某些较�
 - 实现基本加速度和方向监测功能
 - 添加重力补偿校准功能
 - 实现实时数据图表显示
+- 强制HTTPS要求
 
 ---
 
