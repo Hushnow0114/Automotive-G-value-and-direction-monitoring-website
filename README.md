@@ -7,7 +7,9 @@
 
 一个基于Web的汽车运动监测应用，使用手机内置传感器实时监测车辆运动过程中的加速度（G值）和方向变化。
 
-![应用预览](https://via.placeholder.com/800x400?text=CarGForce+Monitor+Preview)
+![应用预览]
+<img width="2825" height="1672" alt="image" src="https://github.com/user-attachments/assets/d1c92ffc-6b1f-4dad-9f7b-89d8899d6c43" />
+
 
 ## 目录
 
