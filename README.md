@@ -160,16 +160,6 @@ window.addEventListener('deviceorientation', (event) => {
 ```
 CarGForce-Monitor/
 ├── index.html          # 主页面文件
-├── styles/             # 样式文件目录
-│   └── main.css        # 主要样式文件
-├── scripts/            # 脚本文件目录
-│   ├── app.js         # 主应用逻辑
-│   ├── sensors.js     # 传感器处理模块
-│   └── charts.js      # 图表处理模块
-├── assets/            # 资源文件目录
-│   └── icons/         # 应用图标
-├── localhost.pem      # 开发环境SSL证书（不提交到Git）
-├── localhost-key.pem  # 开发环境SSL私钥（不提交到Git）
 └── README.md          # 项目说明文件
 ```
 
